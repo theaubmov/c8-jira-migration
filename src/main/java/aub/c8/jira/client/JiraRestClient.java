@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import aub.c8.jira.dao.CreateSprintPayload;
 
-@FeignClient(name = "jira", url = "https://hgrsolutions.atlassian.net/rest")
+@FeignClient(name = "jira", url = "https://hgrsolutions.atlassian.net/rest", configuration = FeignClientConfiguration.class)
 public interface JiraRestClient {
 
 	@RequestMapping(method =  RequestMethod.POST, value = "/agile/1.0/sprint")
