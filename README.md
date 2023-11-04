@@ -25,5 +25,5 @@ To get started with this PoC, clone the repository and follow the setup instruct
 - Camunda 8 Account
 - Access to JIRA with necessary permissions to fetch and create issues
 
-### Author
-AYOUB AIT LACHGAR
+## 🚀 About Me
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ayoubaitlachgar.com/)
