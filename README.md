@@ -25,3 +25,5 @@ To get started with this PoC, clone the repository and follow the setup instruct
 - Camunda 8 Account
 - Access to JIRA with necessary permissions to fetch and create issues
 
+### Author
+AYOUB AIT LACHGAR
