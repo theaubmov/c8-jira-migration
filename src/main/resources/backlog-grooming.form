@@ -1,0 +1,147 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.3.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "013bfbb"
+  },
+  "schemaVersion": 12,
+  "components": [
+    {
+      "text": "# Backlog Grooming",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0w7zymj",
+        "columns": null
+      },
+      "id": "Field_1jzz3zv"
+    },
+    {
+      "components": [
+        {
+          "label": "Select Issue",
+          "type": "select",
+          "layout": {
+            "row": "Row_0xknkmd",
+            "columns": null
+          },
+          "id": "Field_0mk4eh2",
+          "key": "SelectInput_Story1",
+          "valuesKey": "issues",
+          "searchable": false,
+          "validate": {
+            "required": true
+          }
+        },
+        {
+          "label": "Estimation",
+          "type": "number",
+          "layout": {
+            "row": "Row_0xknkmd",
+            "columns": null
+          },
+          "id": "Field_18w1mw3",
+          "key": "NumberInput_Story1",
+          "validate": {
+            "required": true,
+            "min": 1,
+            "max": 5
+          }
+        }
+      ],
+      "showOutline": true,
+      "label": "Story One",
+      "type": "group",
+      "layout": {
+        "row": "Row_1pjd6zs",
+        "columns": null
+      },
+      "id": "Field_0jydtna"
+    },
+    {
+      "components": [
+        {
+          "label": "Select Issue",
+          "type": "select",
+          "layout": {
+            "row": "Row_141ipcl",
+            "columns": null
+          },
+          "id": "Field_13k59zh",
+          "key": "SelectInput_Story2",
+          "valuesKey": "issues",
+          "validate": {
+            "required": true
+          }
+        },
+        {
+          "label": "Estimation",
+          "type": "number",
+          "layout": {
+            "row": "Row_141ipcl",
+            "columns": null
+          },
+          "id": "Field_0yoq042",
+          "key": "NumberInput_Story2",
+          "validate": {
+            "required": true,
+            "min": 1,
+            "max": 5
+          }
+        }
+      ],
+      "showOutline": true,
+      "label": "Story Two",
+      "type": "group",
+      "layout": {
+        "row": "Row_0o94mxf",
+        "columns": null
+      },
+      "id": "Field_0ihg6bt"
+    },
+    {
+      "components": [
+        {
+          "label": "Select Issue",
+          "type": "select",
+          "layout": {
+            "row": "Row_0dfld3s",
+            "columns": null
+          },
+          "id": "Field_1ou8cmo",
+          "key": "SelectInput_Story3",
+          "valuesKey": "issues",
+          "validate": {
+            "required": true
+          }
+        },
+        {
+          "label": "Estimation",
+          "type": "number",
+          "layout": {
+            "row": "Row_0dfld3s",
+            "columns": null
+          },
+          "id": "Field_0vkdwwk",
+          "key": "NumberInput_Story3",
+          "validate": {
+            "required": true,
+            "min": 1,
+            "max": 5
+          }
+        }
+      ],
+      "showOutline": true,
+      "label": "Story Three",
+      "type": "group",
+      "layout": {
+        "row": "Row_19y66yg",
+        "columns": null
+      },
+      "id": "Field_0qlfiym"
+    }
+  ],
+  "type": "default",
+  "id": "Form_08t6jlr"
+}

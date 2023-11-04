@@ -1,0 +1,90 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.3.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "013bfbb"
+  },
+  "schemaVersion": 12,
+  "components": [
+    {
+      "text": "# Create New Sprint",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0fdwwpj",
+        "columns": null
+      },
+      "id": "Field_1gbyh2h"
+    },
+    {
+      "label": "Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0d9njmb",
+        "columns": null
+      },
+      "id": "Field_015gro7",
+      "key": "newsprint_name",
+      "properties": { },
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Sprint Goal",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1yvj2bm",
+        "columns": null
+      },
+      "id": "Field_0pe1bam",
+      "key": "newsprint_goal",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Start Date",
+      "label": "Date time",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_1knm3vs",
+        "columns": null
+      },
+      "id": "Field_07x7xjq",
+      "key": "newsprint_startdate",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "End Date",
+      "label": "Date time",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_0gy5jba",
+        "columns": null
+      },
+      "id": "Field_0y6u84n",
+      "key": "newsprint_enddate",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "action": "submit",
+      "label": "Create Sprint",
+      "type": "button",
+      "layout": {
+        "row": "Row_19e55a8",
+        "columns": null
+      },
+      "id": "Field_1tk6054"
+    }
+  ],
+  "type": "default",
+  "id": "define-sprint-goal-1ckuv7r"
+}
