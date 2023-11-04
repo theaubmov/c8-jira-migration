@@ -9,6 +9,6 @@ import feign.auth.BasicAuthRequestInterceptor;
 public class FeignClientConfiguration {
 	@Bean
     public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
-         return new BasicAuthRequestInterceptor("ayoub@hgrsolutions.io", "ATATT3xFfGF0r7jNO55-1xFPfUXG52wzDj9xw-Ow42kaFM7MeYHar9eYH4cO9ed7m7De7NEGiAcLFmGXkYYdAxcHQkkI-a4cD2osGMl3j12b5NpIKeviFLjPeqv2mDzJVcNgwe5dlyEaUAV3ZX7QMAMM0l_R6MNb6I-zijcGHpp2pjQb1WnNhQ0=FB165FF5");
+         return new BasicAuthRequestInterceptor("ayoub@hgrsolutions.io", "ATATT3xFfGF0ydiiPuAJHqIm9VROuZFD77VLEjFDYEi4_HveDJpa2tW6AXXi06Agc-Op3AFQ8n5Ts0dVsRGolMD7WtszGWSysUYQxJ0-racFmGvdOtc7Y1Z-8W6Nis2W7w4yIN7e7knDZzk3c6cieHBKbZQITD957vNUP1_ocaVNFpk4twZpJMA=5978A4DC");
     }
 }

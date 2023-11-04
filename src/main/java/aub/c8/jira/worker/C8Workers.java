@@ -1,5 +1,8 @@
 package aub.c8.jira.worker;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import aub.c8.jira.client.JiraRestClient;
 import aub.c8.jira.dao.CreateSprintPayload;
+import aub.c8.jira.dao.FetchJiraResponse;
+import aub.c8.jira.dao.SelectInput;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import io.camunda.zeebe.spring.client.lifecycle.ZeebeClientLifecycle;
@@ -32,12 +37,28 @@ public class C8Workers {
 		
 		CreateSprintPayload payload = new CreateSprintPayload(sprintName, sprintGoal, sprintStartDate, sprintEndDate);
 		Object resp = jiraRestClient.createSprint(payload);
-		System.out.println("DONE!!");
+		
+		System.out.println("New Sprint has been created successfully!");
 	}
 	
 	@JobWorker(type = "FetchIssuesWorker")
 	public void fetchIssuesWorker(final ActivatedJob job) {
 		System.out.println("Fetch Issues Worker");
+		FetchJiraResponse resp = jiraRestClient.fetchJiraIssues();
+		
+		List<SelectInput> selects = new ArrayList<SelectInput>();
+		
+		for(int i = 0; i < resp.getIssues().size() ; i++) {
+			SelectInput newInput = new SelectInput(resp.getIssues().get(i).getFields().getSummary(), resp.getIssues().get(i).getId());
+			selects.add(newInput);
+		}
+		
+		
+		final Map<String, Object> variables = new HashMap<String, Object>();
+	    variables.put("issues", selects);
+	    
+	    client.newCompleteCommand(job.getKey()).variables(variables).send().join();
+	    System.out.println("Fetch Issues Worker DONE!");
 	}
 	
 	@JobWorker(type = "UpdateSprintInJiraWorker")
