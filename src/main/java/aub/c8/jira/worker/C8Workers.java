@@ -1,7 +1,6 @@
 package aub.c8.jira.worker;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +9,12 @@ import org.springframework.stereotype.Component;
 
 import aub.c8.jira.client.JiraRestClient;
 import aub.c8.jira.dao.CreateSprintPayload;
+import aub.c8.jira.dao.CreateSprintResponse;
+import aub.c8.jira.dao.EstimationField;
 import aub.c8.jira.dao.FetchJiraResponse;
+import aub.c8.jira.dao.MoveIssuesToSprintPayload;
 import aub.c8.jira.dao.SelectInput;
+import aub.c8.jira.dao.UpdateIssueEstimationPayload;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import io.camunda.zeebe.spring.client.lifecycle.ZeebeClientLifecycle;
@@ -36,9 +39,11 @@ public class C8Workers {
 		final String sprintStartDate = (String) inputVariables.get("newsprint_startdate");
 		
 		CreateSprintPayload payload = new CreateSprintPayload(sprintName, sprintGoal, sprintStartDate, sprintEndDate);
-		Object resp = jiraRestClient.createSprint(payload);
+		CreateSprintResponse response = jiraRestClient.createSprint(payload);
 		
-		System.out.println("New Sprint has been created successfully!");
+		inputVariables.put("SprintID", response.getId());
+	    
+	    client.newCompleteCommand(job.getKey()).variables(inputVariables).send().join();
 	}
 	
 	@JobWorker(type = "FetchIssuesWorker")
@@ -53,17 +58,40 @@ public class C8Workers {
 			selects.add(newInput);
 		}
 		
-		
-		final Map<String, Object> variables = new HashMap<String, Object>();
-	    variables.put("issues", selects);
+		final Map<String, Object> inputVariables = job.getVariablesAsMap();
+		inputVariables.put("issues", selects);
 	    
-	    client.newCompleteCommand(job.getKey()).variables(variables).send().join();
+	    client.newCompleteCommand(job.getKey()).variables(inputVariables).send().join();
 	    System.out.println("Fetch Issues Worker DONE!");
 	}
 	
 	@JobWorker(type = "UpdateSprintInJiraWorker")
 	public void updateSprintJiraWorker(final ActivatedJob job) {
 		System.out.println("Update Sprint Jira Worker");
+		
+		final Map<String, Object> inputVariables = job.getVariablesAsMap();
+		final String sprintID = (String) inputVariables.get("SprintID");
+		
+		final String selectInput1 = (String) inputVariables.get("SelectInput_Story1");
+		final Integer estimation1 = (Integer) inputVariables.get("NumberInput_Story1");
+		jiraRestClient.updateIssueEstimation(selectInput1, new UpdateIssueEstimationPayload(new EstimationField(estimation1)));
+		
+		final String selectInput2 = (String) inputVariables.get("SelectInput_Story2");
+		final Integer estimation2 = (Integer) inputVariables.get("NumberInput_Story2");
+		jiraRestClient.updateIssueEstimation(selectInput2, new UpdateIssueEstimationPayload(new EstimationField(estimation2)));
+		
+		final String selectInput3 = (String) inputVariables.get("SelectInput_Story3");
+		final Integer estimation3 = (Integer) inputVariables.get("NumberInput_Story3");
+		jiraRestClient.updateIssueEstimation(selectInput3, new UpdateIssueEstimationPayload(new EstimationField(estimation3)));
+		
+		List<String> issueIDS = new ArrayList<String>();
+		issueIDS.add(selectInput1);
+		issueIDS.add(selectInput2);
+		issueIDS.add(selectInput3);
+		MoveIssuesToSprintPayload payload = new MoveIssuesToSprintPayload(issueIDS);
+		
+		jiraRestClient.moveIssuesToSprint(sprintID, payload);
+		
 	}
 	
 	@JobWorker(type = "UpdateTicketInJiraWorker")
@@ -84,7 +112,8 @@ public class C8Workers {
 	@JobWorker(type = "Message_SprintCreated")
 	public void sendSprintCreatedMessage(final ActivatedJob job) {
 		System.out.println("Sprint Created Message");
-		client.newPublishMessageCommand().messageName("Message_SprintCreated").correlationKey(job.getBpmnProcessId()).send().join();
+		final Map<String, Object> jobVariables = job.getVariablesAsMap();
+		client.newPublishMessageCommand().messageName("Message_SprintCreated").correlationKey(job.getBpmnProcessId()).variables(jobVariables).send().join();
 	}
 	
 	@JobWorker(type = "Message_SprintStarted")
