@@ -4,7 +4,7 @@
 This repository contains a Proof of Concept for migrating sprint workflows from JIRA to Camunda. It showcases a BPMN process for Sprint Creation and Planning, integrating with JIRA via REST API to fetch issues and manage sprints.
 
 ## Workflow Overview
-![Workflow Overview](path/to/workflow-image.png)
+![Workflow Overview]([path/to/workflow-image.png](https://assets.zyrosite.com/m7VEG49oOecMOJLw/c8-sprint-planning-execution-Aq26X7yz0jfjZj9w.png))
 *Above is the BPMN diagram depicting the entire sprint management workflow from creation, planning to execution.*
 
 ## Features
