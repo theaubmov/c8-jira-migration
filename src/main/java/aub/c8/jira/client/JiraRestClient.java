@@ -12,7 +12,7 @@ import aub.c8.jira.dao.FetchJiraResponse;
 import aub.c8.jira.dao.MoveIssuesToSprintPayload;
 import aub.c8.jira.dao.UpdateIssueEstimationPayload;
 
-@FeignClient(name = "jira", url = "https://hgrsolutions.atlassian.net/rest", configuration = FeignClientConfiguration.class)
+@FeignClient(name = "jira", url = "https://space.atlassian.net/rest", configuration = FeignClientConfiguration.class)
 public interface JiraRestClient {
 	
 
